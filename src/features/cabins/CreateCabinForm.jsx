@@ -1,16 +1,16 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import Input from "../../ui/Input";
-import Form from "../../ui/Form";
-import Button from "../../ui/Button";
-import FileInput from "../../ui/FileInput";
-import Textarea from "../../ui/Textarea";
-import FormRow from "../../ui/formRow";
+import Input from "../../ui/Input.jsx";
+import Form from "../../ui/Form.jsx";
+import Button from "../../ui/Button.jsx";
+import FileInput from "../../ui/FileInput.jsx";
+import Textarea from "../../ui/Textarea.jsx";
+import FormRow from "../../ui/FormRow.jsx";
 
 import z from "zod";
-import { useCreateCabin } from "../../hooks/useCreateCabin";
-import { useEditCabin } from "../../hooks/useEditCabin";
+import { useCreateCabin } from "../../hooks/useCreateCabin.js";
+import { useEditCabin } from "../../hooks/useEditCabin.js";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
