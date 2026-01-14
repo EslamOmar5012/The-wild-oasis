@@ -8,18 +8,19 @@ import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import { SlReload } from "react-icons/sl";
 import { useCreateCabin } from "../../hooks/useCreateCabin";
 import Modal from "../../ui/Modal";
+import Table from "../../ui/Table";
 
-const TableRow = styled.div`
-  display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-  column-gap: 2.4rem;
-  align-items: center;
-  padding: 1.4rem 2.4rem;
+// const TableRow = styled.div`
+//   display: grid;
+//   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
+//   column-gap: 2.4rem;
+//   align-items: center;
+//   padding: 1.4rem 2.4rem;
 
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-`;
+//   &:not(:last-child) {
+//     border-bottom: 1px solid var(--color-grey-100);
+//   }
+// `;
 
 const Img = styled.img`
   display: block;
@@ -78,46 +79,44 @@ function CabinRow({ cabin }) {
   const cabinImage = useRef(image.split("/").at(-1));
 
   return (
-    <>
-      <TableRow role="row">
-        <Img src={image} />
-        <Cabin>{name}</Cabin>
-        <div>Fits up to {maxCapacity} guests</div>
-        <Price>{formatCurrency(regularPrice)}</Price>
-        {discount ? (
-          <Discount>{formatCurrency(discount)}</Discount>
-        ) : (
-          <span>&mdash;</span>
-        )}
-        <div>
-          <button disabled={isDuplicating} onClick={handleDuplicate}>
-            <HiSquare2Stack />
-          </button>
-          <Modal>
-            <Modal.Open opens="edit">
-              <button onClick={() => setShow((prev) => !prev)}>
-                <HiPencil />
-              </button>
-            </Modal.Open>
-            <Modal.Window name="edit">
-              <CreateCabinForm
-                cabinToEdit={cabin}
-                hideForm={setShow}
-                type="modal"
-              />
-            </Modal.Window>
-            <button
-              onClick={() =>
-                deleteCabin({ id: cabinId, image: cabinImage.current })
-              }
-              disabled={isDeleting}
-            >
-              {isDeleting ? <SlReload /> : <HiTrash />}
+    <Table.Row columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+      <Img src={image} />
+      <Cabin>{name}</Cabin>
+      <div>Fits up to {maxCapacity} guests</div>
+      <Price>{formatCurrency(regularPrice)}</Price>
+      {discount ? (
+        <Discount>{formatCurrency(discount)}</Discount>
+      ) : (
+        <span>&mdash;</span>
+      )}
+      <div>
+        <button disabled={isDuplicating} onClick={handleDuplicate}>
+          <HiSquare2Stack />
+        </button>
+        <Modal>
+          <Modal.Open opens="edit">
+            <button onClick={() => setShow((prev) => !prev)}>
+              <HiPencil />
             </button>
-          </Modal>
-        </div>
-      </TableRow>
-    </>
+          </Modal.Open>
+          <Modal.Window name="edit">
+            <CreateCabinForm
+              cabinToEdit={cabin}
+              hideForm={setShow}
+              type="modal"
+            />
+          </Modal.Window>
+          <button
+            onClick={() =>
+              deleteCabin({ id: cabinId, image: cabinImage.current })
+            }
+            disabled={isDeleting}
+          >
+            {isDeleting ? <SlReload /> : <HiTrash />}
+          </button>
+        </Modal>
+      </div>
+    </Table.Row>
   );
 }
 
