@@ -21,9 +21,9 @@ const ACCEPTED_IMAGE_TYPES = [
   "image/x-icon",
 ];
 
-function CreateCabinForm({ hideForm, cabinToEdit = {} }) {
+function CreateCabinForm({ hideForm, cabinToEdit = {}, type }) {
   const { id: editId, ...editValues } = cabinToEdit;
-  console.log(editId);
+
   const isEditSession = Boolean(editId);
 
   const cabinSchema = z.object({
@@ -113,7 +113,7 @@ function CreateCabinForm({ hideForm, cabinToEdit = {} }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} type={type}>
       <FormRow label="cabin name" error={errors.name}>
         <Input type="text" id="name" {...register("name")} />
       </FormRow>
