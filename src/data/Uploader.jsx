@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { isFuture, isPast, isToday } from "date-fns";
-import supabase from "../services/supabase";
+import { supabase } from "../services/supabase";
 import Button from "../ui/Button";
 import { subtractDates } from "../utils/helpers";
 
@@ -56,10 +56,10 @@ async function createBookings() {
   const finalBookings = bookings.map((booking) => {
     // Here relying on the order of cabins, as they don't have and ID yet
     const cabin = cabins.at(booking.cabinId - 1);
-    const numNights = subtractDates(booking.endDate, booking.startDate);
-    const cabinPrice = numNights * (cabin.regularPrice - cabin.discount);
+    const numberOfNights = subtractDates(booking.endDate, booking.startDate);
+    const cabinPrice = numberOfNights * (cabin.regularPrice - cabin.discount);
     const extrasPrice = booking.hasBreakfast
-      ? numNights * 15 * booking.numGuests
+      ? numberOfNights * 15 * booking.numGuests
       : 0; // hardcoded breakfast price
     const totalPrice = cabinPrice + extrasPrice;
 
@@ -84,7 +84,7 @@ async function createBookings() {
 
     return {
       ...booking,
-      numNights,
+      numberOfNights,
       cabinPrice,
       extrasPrice,
       totalPrice,
@@ -140,11 +140,21 @@ function Uploader() {
     >
       <h3>SAMPLE DATA</h3>
 
-      <Button onClick={uploadAll} disabled={isLoading}>
+      <Button
+        $size="medium"
+        $variation="primary"
+        onClick={uploadAll}
+        disabled={isLoading}
+      >
         Upload ALL
       </Button>
 
-      <Button onClick={uploadBookings} disabled={isLoading}>
+      <Button
+        $size="medium"
+        $variation="primary"
+        onClick={uploadBookings}
+        disabled={isLoading}
+      >
         Upload bookings ONLY
       </Button>
     </div>
