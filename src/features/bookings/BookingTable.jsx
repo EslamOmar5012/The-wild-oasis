@@ -13,7 +13,7 @@ function BookingTable() {
 
   if (error) return <ErrorHeader>{error.message}</ErrorHeader>;
 
-  if (!bookings.length) return <Empty resourceName="bookings" />;
+  if (!bookings.data.length) return <Empty resourceName="bookings" />;
 
   return (
     <Menus>
@@ -28,14 +28,14 @@ function BookingTable() {
         </Table.Header>
 
         <Table.Body
-          data={bookings}
+          data={bookings.data}
           render={(booking) => (
             <BookingRow key={booking.id} booking={booking} />
           )}
         />
 
         <Table.Footer>
-          <Pagination count={bookings.length} />
+          <Pagination count={bookings.count} />
         </Table.Footer>
       </Table>
     </Menus>
