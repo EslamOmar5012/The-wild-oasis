@@ -42,6 +42,7 @@ function Filter({ filterField, options }) {
 
   const handleClick = (value) => {
     filterParams.set(filterField, value);
+    if (filterParams.get("page")) filterParams.set("page", 1);
     setFilterParams(filterParams);
   };
 
