@@ -15,6 +15,7 @@ import ErrorHeader from "../../ui/ErrorHeader.jsx";
 import { useNavigate } from "react-router-dom";
 import { useCheckOut } from "../../hooks/useCheckOut.js";
 import { HiArrowUpOnSquare } from "react-icons/hi2";
+import { useDeleteBooking } from "../../hooks/useDeleteBooking.js";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -26,6 +27,8 @@ function BookingDetail() {
   const [isLoading, booking, error] = useBooking();
 
   const [isCheckingOut, checkOut] = useCheckOut();
+
+  const [isDeleting, deleteBooking] = useDeleteBooking();
 
   const moveBack = useMoveBack();
 
@@ -69,6 +72,16 @@ function BookingDetail() {
             Check Out
           </Button>
         )}
+
+        <Button
+          $variation="danger"
+          $size="medium"
+          onClick={() => deleteBooking(booking.id)}
+          disabled={isDeleting}
+        >
+          Delete
+        </Button>
+
         <Button $variation="secondary" $size="medium" onClick={moveBack}>
           Back
         </Button>

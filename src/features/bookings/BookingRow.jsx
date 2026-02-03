@@ -6,9 +6,16 @@ import Table from "../../ui/Table.jsx";
 
 import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers.js";
 import Menus from "../../ui/Menus.jsx";
-import { HiArrowDownOnSquare, HiArrowUpOnSquare, HiEye } from "react-icons/hi2";
+import {
+  HiArrowDownOnSquare,
+  HiArrowUpOnSquare,
+  HiEye,
+  HiTrash,
+} from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { useCheckOut } from "../../hooks/useCheckOut.js";
+import { SlReload } from "react-icons/sl";
+import { useDeleteBooking } from "../../hooks/useDeleteBooking.js";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -60,6 +67,8 @@ function BookingRow({
   const navigate = useNavigate();
 
   const [isCheckingOut, checkOut] = useCheckOut();
+
+  const [isDeleting, deleteBooking] = useDeleteBooking();
 
   return (
     <Table.Row>
@@ -115,6 +124,14 @@ function BookingRow({
               Check Out
             </Menus.Button>
           )}
+
+          <Menus.Button
+            icon={isDeleting ? <SlReload /> : <HiTrash />}
+            onClick={() => deleteBooking(bookingId)}
+            disabled={isDeleting}
+          >
+            Delete
+          </Menus.Button>
         </Menus.List>
       </Menus.Menu>
     </Table.Row>
