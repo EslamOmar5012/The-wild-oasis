@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { useUser } from "../hooks/useUser";
-import Spinner from "./Spinner";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../hooks/useUser";
 import { useEffect } from "react";
+import styled from "styled-components";
+import Spinner from "./Spinner";
 
 const FullPage = styled.div`
   height: 100vh;
@@ -12,15 +12,13 @@ const FullPage = styled.div`
   justify-content: center;
 `;
 
-function ProtectedRoute({ children }) {
+function ProtectedLogin({ children }) {
   const navigate = useNavigate();
   const { isLoading, isAuthenticated } = useUser();
 
-  console.log(isAuthenticated);
-
   useEffect(() => {
-    if (!isAuthenticated && !isLoading) navigate("/login");
-  }, [isAuthenticated, isLoading, navigate]);
+    if (isAuthenticated) navigate("/");
+  }, [isAuthenticated, navigate]);
 
   if (isLoading)
     return (
@@ -29,7 +27,7 @@ function ProtectedRoute({ children }) {
       </FullPage>
     );
 
-  if (isAuthenticated) return children;
+  if (!isAuthenticated) return children;
 }
 
-export default ProtectedRoute;
+export default ProtectedLogin;

@@ -20,6 +20,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Booking from "./pages/Booking";
 import CheckIn from "./pages/CheckIn";
+import ProtectedRoute from "./ui/ProtectedRoute";
+import ProtectedLogin from "./ui/protectedLogin";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,7 +34,11 @@ const queryClient = new QueryClient({
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Applayout />,
+    element: (
+      <ProtectedRoute>
+        <Applayout />
+      </ProtectedRoute>
+    ),
     children: [
       { index: true, element: <Navigate to="/dashboard" replace={true} /> },
       { path: "/dashboard", element: <Dashboard /> },
@@ -43,10 +49,17 @@ const router = createBrowserRouter([
       { path: "/users", element: <Users /> },
       { path: "/settings", element: <Settings /> },
       { path: "/account", element: <Account /> },
-      { path: "/login", element: <Login /> },
-      { path: "*", element: <PageNotFound /> },
     ],
   },
+  {
+    path: "/login",
+    element: (
+      <ProtectedLogin>
+        <Login />
+      </ProtectedLogin>
+    ),
+  },
+  { path: "*", element: <PageNotFound /> },
 ]);
 
 function App() {

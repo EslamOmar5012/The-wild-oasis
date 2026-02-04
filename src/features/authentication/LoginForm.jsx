@@ -16,7 +16,15 @@ function LoginForm() {
     e.preventDefault();
     if (!email || !password) return;
 
-    login({ email, password });
+    login(
+      { email, password },
+      {
+        onSettled: () => {
+          setEmail("");
+          setPassword("");
+        },
+      },
+    );
   }
 
   return (
@@ -44,7 +52,7 @@ function LoginForm() {
       </FormRowVertical>
       <FormRowVertical>
         <Button $size="large" $variation="primary" style={{ width: "100%" }}>
-          {isLoading ? "Log in" : <SpinnerMini />}
+          {isLoading ? <SpinnerMini /> : "Log in"}
         </Button>
       </FormRowVertical>
     </Form>
