@@ -23,6 +23,7 @@ import CheckIn from "./pages/CheckIn";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import ProtectedLogin from "./ui/protectedLogin";
 import { DarkModeProvider } from "./context/ThemeContext";
+import ErrorFullBack from "./ui/ErrorFallback";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
         </DarkModeProvider>
       </ProtectedRoute>
     ),
+    errorElement: <ErrorFullBack />,
     children: [
       { index: true, element: <Navigate to="/dashboard" replace={true} /> },
       { path: "/dashboard", element: <Dashboard /> },
@@ -61,6 +63,7 @@ const router = createBrowserRouter([
         <Login />
       </ProtectedLogin>
     ),
+    errorElement: <ErrorFullBack />,
   },
   { path: "*", element: <PageNotFound /> },
 ]);

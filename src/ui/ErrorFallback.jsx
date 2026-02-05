@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import Heading from "./Heading";
+import GlobalStyle from "../styles/GlobalStyle";
+import { useRouteError } from "react-router-dom";
 
 const StyledErrorFallback = styled.main`
   height: 100vh;
@@ -29,3 +32,20 @@ const Box = styled.div`
     color: var(--color-grey-500);
   }
 `;
+
+function ErrorFullBack({ error }) {
+  const routeError = useRouteError();
+  return (
+    <>
+      <GlobalStyle />
+      <StyledErrorFallback>
+        <Box>
+          <Heading as="h1">Something went wrong.</Heading>
+          <p>{routeError.message || error.message}</p>
+        </Box>
+      </StyledErrorFallback>
+    </>
+  );
+}
+
+export default ErrorFullBack;
