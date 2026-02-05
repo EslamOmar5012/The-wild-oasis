@@ -38,9 +38,7 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <ProtectedRoute>
-        <DarkModeProvider>
-          <Applayout />
-        </DarkModeProvider>
+        <Applayout />
       </ProtectedRoute>
     ),
     errorElement: <ErrorFullBack />,
