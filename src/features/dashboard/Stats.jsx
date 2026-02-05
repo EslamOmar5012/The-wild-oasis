@@ -15,7 +15,7 @@ function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
       numDays) *
     cabinCount;
 
-  console.log(numDays, cabinCount);
+  // console.log(numDays, cabinCount);
 
   return (
     <>
