@@ -22,6 +22,7 @@ import Booking from "./pages/Booking";
 import CheckIn from "./pages/CheckIn";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import ProtectedLogin from "./ui/protectedLogin";
+import { DarkModeProvider } from "./context/ThemeContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,7 +37,9 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <ProtectedRoute>
-        <Applayout />
+        <DarkModeProvider>
+          <Applayout />
+        </DarkModeProvider>
       </ProtectedRoute>
     ),
     children: [
