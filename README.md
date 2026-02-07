@@ -12,6 +12,7 @@
 ## 📋 Table of Contents
 
 - [Overview](#-overview)
+- [How to test](#-how-to-test)
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
 - [Architecture](#-architecture)
@@ -42,6 +43,10 @@
 - 📱 **Responsive Design** - Works seamlessly across devices
 
 ---
+
+## How to test
+- In email enter (eslam.O.elkhabery@gmail.com)
+- In password enter (101020013689741568)
 
 ## ✨ Features
 
